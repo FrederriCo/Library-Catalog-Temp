@@ -29,6 +29,16 @@ jobs:
         run: sleep 5
       - name: Start Integration test
         run: npm run start-test
+  deploy-backend:
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to production
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.RENDER_BACKEND_KEY }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
+          wait-for-success: true
      
       
       
