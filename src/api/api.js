@@ -1,5 +1,5 @@
 export const settings = {
-    host: '',
+    host: 'https://backend-demo-g3st.onrender.com',
 };
 
 async function request(url, options) {
