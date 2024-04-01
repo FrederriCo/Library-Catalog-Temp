@@ -26,7 +26,7 @@ jobs:
       - name: Start FrontEnd
         run: npm run start-fe &
       - name: Wait 3 second
-        run: sleep 5
+        run: sleep 3
       - name: Start Integration test
         run: npm run start-test
   deploy-backend:
