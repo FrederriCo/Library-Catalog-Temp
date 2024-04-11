@@ -54,5 +54,5 @@ test("Submits an empty form ", async ({ page }) => {
 
     await page.$('a[href="/login"]');
    
-    expect(page.url()).toBe('http://localhost:3001');
+    expect(page.url()).toBe('http://localhost:3001/login');
 });
