@@ -41,3 +41,18 @@ test("Login with valid credentials", async ({ page }) => {
    
     expect(page.url()).toBe('http://localhost:3001/catalog');
 }); 
+
+test("Submits an empty form ", async ({ page }) => {
+    await page.goto('http://localhost:3001/login');
+    await page.click('input[type="submit"]');
+
+    page.on('dialog', async dialog => {
+        expect(dialog.type()).toContain('alert');
+        expect(dialog.message()).toContain('All fields are required!');
+        await dialog.accept();
+    });
+
+    await page.$('a[href="/login"]');
+   
+    expect(page.url()).toBe('http://localhost:3001');
+});
