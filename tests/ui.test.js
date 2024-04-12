@@ -56,3 +56,19 @@ test("Submits an empty form ", async ({ page }) => {
    
     expect(page.url()).toBe('http://localhost:3001/login');
 });
+
+test('Login with empty email field.', async ({page}) => {
+    await page.goto('http://localhost:3001/login');
+    await page.fill('input[name="password"]', '123456');
+
+
+    page.on('dialog', async dialog => {
+        expect(dialog.type()).toContain('alert');
+        expect(dialog.message()).toContain('All fields are required!');
+        await dialog.accept();
+    });
+    await page.click('input[type="submit"]');
+
+    await page.$('a[href="/login"]');
+    expect(page.url()).toBe('http://localhost:3001/login');
+});
