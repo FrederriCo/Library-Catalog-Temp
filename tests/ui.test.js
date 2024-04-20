@@ -84,6 +84,6 @@ test('Login with empty password field.', async ({page}) => {
     });
     await page.click('input[type="submit"]');
 
-    
+    await page.$('a[href="/login"]');
     expect(page.url()).toBe('http://localhost:3001/login');
 });
