@@ -92,6 +92,7 @@ test('Register with valid credentials.', async ({page}) => {
     await page.goto('http://localhost:3001/register');
     await page.fill('input[name="email"]', 'testuser1@abv.bg');
     await page.fill('input[name="password"]', '1234567');
+    await page.fill('input[name="confirm-pass"]', '1234567');
     await page.click('input[type="submit"]');
 
     await page.$('a[href="/catalog"]');
