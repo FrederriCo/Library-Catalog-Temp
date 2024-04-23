@@ -98,3 +98,23 @@ test('Register with valid credentials.', async ({page}) => {
     await page.$('a[href="/catalog"]');
     expect(page.url()).toBe('http://localhost:3001/catalog');
 });
+
+
+test('Add book with correct data', async ({page}) => {
+    await page.goto('http://localhost:3001/login');
+    await page.fill('input[name="email"]', 'peter@abv.bg');
+    await page.fill('input[name="password"]', '123456');
+
+    await Promise.all([
+        page.click('input[type="submit"]'),
+        page.waitForURL('http://localhost:3001/catalog')
+    ]);
+    await page.click('a[href="/create"]');
+    await page.waitForSelector('#create-form')
+    await page.fill('#description', 'This is a test book description');
+    await page.fill('#image', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg/1200px-Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg')
+    await page.selectOption('#type', 'Fiction');
+    await page.click('#create-form input[type="submit"]');
+    await page.waitForURL('http://localhost:3001/catalog')
+    expect(page.url()).toBe('http://localhost:3001/catalog');
+});
