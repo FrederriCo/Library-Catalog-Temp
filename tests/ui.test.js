@@ -111,6 +111,7 @@ test('Add book with correct data', async ({page}) => {
     ]);
     await page.click('a[href="/create"]');
     await page.waitForSelector('#create-form')
+    await page.fill('#title', 'Test Book');
     await page.fill('#description', 'This is a test book description');
     await page.fill('#image', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg/1200px-Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg')
     await page.selectOption('#type', 'Fiction');
