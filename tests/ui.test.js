@@ -39,11 +39,11 @@ test("Login with valid credentials", async ({ page }) => {
 
     await page.$('a[href="/catalog"]');
    
-    expect(page.url()).toBe('http://localhost:3001/catalog');
+    expect(page.url()).toBe('http://localhost:3000/catalog');
 }); 
 
 test("Submits an empty form ", async ({ page }) => {
-    await page.goto('http://localhost:3001/login');
+    await page.goto('http://localhost:3000/login');
     await page.click('input[type="submit"]');
 
     page.on('dialog', async dialog => {
@@ -54,11 +54,11 @@ test("Submits an empty form ", async ({ page }) => {
 
     await page.$('a[href="/login"]');
    
-    expect(page.url()).toBe('http://localhost:3001/login');
+    expect(page.url()).toBe('http://localhost:3000/login');
 });
 
 test('Login with empty email field.', async ({page}) => {
-    await page.goto('http://localhost:3001/login');
+    await page.goto('http://localhost:3000/login');
     await page.fill('input[name="password"]', '123456');
 
 
@@ -70,11 +70,11 @@ test('Login with empty email field.', async ({page}) => {
     await page.click('input[type="submit"]');
 
     await page.$('a[href="/login"]');
-    expect(page.url()).toBe('http://localhost:3001/login');
+    expect(page.url()).toBe('http://localhost:3000/login');
 });
 
 test('Login with empty password field.', async ({page}) => {
-    await page.goto('http://localhost:3001/login');
+    await page.goto('http://localhost:3000/login');
     await page.fill('input[name="email"]', 'peter@abv.bg');
 
     page.on('dialog', async dialog => {
@@ -85,29 +85,29 @@ test('Login with empty password field.', async ({page}) => {
     await page.click('input[type="submit"]');
 
     await page.$('a[href="/login"]');
-    expect(page.url()).toBe('http://localhost:3001/login');
+    expect(page.url()).toBe('http://localhost:3000/login');
 });
 
 test('Register with valid credentials.', async ({page}) => {
-    await page.goto('http://localhost:3001/register');
+    await page.goto('http://localhost:3000/register');
     await page.fill('input[name="email"]', 'testuser1@abv.bg');
     await page.fill('input[name="password"]', '1234567');
     await page.fill('input[name="confirm-pass"]', '1234567');
     await page.click('input[type="submit"]');
 
     await page.$('a[href="/catalog"]');
-    expect(page.url()).toBe('http://localhost:3001/catalog');
+    expect(page.url()).toBe('http://localhost:3000/catalog');
 });
 
 
 test('Add book with correct data', async ({page}) => {
-    await page.goto('http://localhost:3001/login');
+    await page.goto('http://localhost:3000/login');
     await page.fill('input[name="email"]', 'peter@abv.bg');
     await page.fill('input[name="password"]', '123456');
 
     await Promise.all([
         page.click('input[type="submit"]'),
-        page.waitForURL('http://localhost:3001/catalog')
+        page.waitForURL('http://localhost:3000/catalog')
     ]);
     await page.click('a[href="/create"]');
     await page.waitForSelector('#create-form')
@@ -121,13 +121,13 @@ test('Add book with correct data', async ({page}) => {
 });
 
 test('Login and verify all books are displayed.', async ({page}) => {
-    await page.goto('http://localhost:3001/login');
+    await page.goto('http://localhost:3000/login');
     await page.fill('input[name="email"]', 'peter@abv.bg');
     await page.fill('input[name="password"]', '123456');
 
     await Promise.all([
         page.click('input[type="submit"]'),
-        page.waitForURL('http://localhost:3001/catalog'),
+        page.waitForURL('http://localhost:3000/catalog'),
     ]);
     await page.waitForSelector('.dashboard');
 
@@ -135,3 +135,4 @@ test('Login and verify all books are displayed.', async ({page}) => {
     expect(bookElements.length).toBeGreaterThan(0);
 
 });
+
