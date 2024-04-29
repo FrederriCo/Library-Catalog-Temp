@@ -129,7 +129,7 @@ test('Login and verify all books are displayed.', async ({page}) => {
         page.click('input[type="submit"]'),
         page.waitForURL('http://localhost:3001/catalog'),
     ]);
-   
+    await page.waitForSelector('.dashboard');
 
     const bookElements = await page.$$('.other-books-list li');
     expect(bookElements.length).toBeGreaterThan(0);
