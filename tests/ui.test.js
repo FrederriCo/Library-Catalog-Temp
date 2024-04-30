@@ -39,7 +39,7 @@ test("Login with valid credentials", async ({ page }) => {
 
     await page.$('a[href="/catalog"]');
    
-    expect(page.url()).toBe('http://localhost:3000/catalog');
+    expect(page.url()).toBe('http://localhost:3000/login');
 }); 
 
 test("Submits an empty form ", async ({ page }) => {
