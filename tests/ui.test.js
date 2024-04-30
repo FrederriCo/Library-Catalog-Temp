@@ -116,8 +116,8 @@ test('Add book with correct data', async ({page}) => {
     await page.fill('#image', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg/1200px-Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg')
     await page.selectOption('#type', 'Fiction');
     await page.click('#create-form input[type="submit"]');
-    await page.waitForURL('http://localhost:3001/catalog')
-    expect(page.url()).toBe('http://localhost:3001/catalog');
+    await page.waitForURL('http://localhost:3000/catalog')
+    expect(page.url()).toBe('http://localhost:3000/catalog');
 });
 
 test('Login and verify all books are displayed.', async ({page}) => {
