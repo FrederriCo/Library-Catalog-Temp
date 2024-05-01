@@ -39,7 +39,7 @@ test("Login with valid credentials", async ({ page }) => {
 
     await page.$('a[href="/catalog"]');
    
-    expect(page.url()).toBe('http://localhost:3000/login');
+    expect(page.url()).toBe('http://localhost:3000/catalog');
 }); 
 
 test("Submits an empty form ", async ({ page }) => {
@@ -154,5 +154,25 @@ test('Login and navigate to Details page check Title is correct.', async ({page}
     const detailsPageTitle = await page.textContent('.book-information h3');
     expect(detailsPageTitle).toBe('Test Book');
 
+});
+
+test('Book Like Button is NOT visible for creator.', async ({page}) => {
+    await page.goto('http://localhost:3000/login');
+    await page.fill('input[name="email"]', 'peter@abv.bg');
+    await page.fill('input[name="password"]', '123456');
+
+    await Promise.all([
+        page.click('input[type="submit"]'),
+        page.waitForURL('http://localhost:3000/catalog'),
+    ]);
+
+    await page.click('a[href="/catalog"]');
+    await page.waitForSelector('.otherBooks');
+    await page.click('.otherBooks a.button');
+    await page.waitForSelector('.book-information div div');
+
+    const likeButton = await page.$('a.button:has-text("Like")');
+    const isLikeButtonVisible = await likeButton == null;
+    expect(isLikeButtonVisible).toBe(true);
 });
 
