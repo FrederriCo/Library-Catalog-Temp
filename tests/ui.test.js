@@ -178,7 +178,7 @@ test('Book Like Button is NOT visible for creator.', async ({page}) => {
 
 
 test('Book Like Button is visible for NON-creator.', async ({page}) => {
-    await page.goto('http://localhost:3001/login');
+    await page.goto('http://localhost:3000/login');
     await page.fill('input[name="email"]', 'john@abv.bg');
     await page.fill('input[name="password"]', '123456');
 
