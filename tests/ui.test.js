@@ -197,3 +197,16 @@ test('Book Like Button is visible for NON-creator.', async ({page}) => {
     expect(isLikeButtonVisible).toBe(true);
 });
 
+test('Verify redirection of logout link after user login.', async ({page}) => {
+    await page.goto('http://localhost:3001/login');
+    await page.fill('input[name="email"]', 'john@abv.bg');
+    await page.fill('input[name="password"]', '123456');
+    await page.click('input[type="submit"]');
+
+    const logoutLink = await page.$('a[href="javascript:void(0)"]');
+    await logoutLink.click();
+
+    const redirectURL = page.url();
+    expect(redirectURL).toBe('http://localhost:3001/catalog')
+});
+
