@@ -211,10 +211,10 @@ test('Verify redirection of logout link after user login.', async ({page}) => {
 });
 
 test('Book description is correct.', async ({page}) => {
-    await page.goto('http://localhost:3001/catalog');
+    await page.goto('http://localhost:3000/catalog');
 
     await Promise.all([
-        page.waitForURL('http://localhost:3001/catalog'),
+        page.waitForURL('http://localhost:3000/catalog'),
     ]);
 
     await page.click('a[href="/catalog"]');
