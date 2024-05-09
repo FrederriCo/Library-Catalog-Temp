@@ -226,3 +226,21 @@ test('Book description is correct.', async ({page}) => {
     expect(detailsPageTitle).toBe('This is a test book description');
 });
 
+test('Book type is correct.', async ({page}) => {
+    await page.goto('http://localhost:3001/catalog');
+
+    await Promise.all([
+        page.waitForURL('http://localhost:3001/catalog'),
+    ]);
+
+    await page.click('a[href="/catalog"]');
+    await page.waitForSelector('.otherBooks');
+    await page.click('.otherBooks a.button');
+    await page.waitForSelector('.book-information');
+
+    const detailsPageTitle = await page.textContent('.book-information p');
+    expect(detailsPageTitle).toBe('Type: Fiction');
+
+});
+
+
