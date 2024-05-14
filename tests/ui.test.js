@@ -236,7 +236,7 @@ test('Book type is correct.', async ({page}) => {
     await page.click('a[href="/catalog"]');
     await page.waitForSelector('.otherBooks');
     await page.click('.otherBooks a.button');
-    
+    await page.waitForSelector('.book-information');
 
     const detailsPageTitle = await page.textContent('.book-information p');
     expect(detailsPageTitle).toBe('Type: Fiction');
